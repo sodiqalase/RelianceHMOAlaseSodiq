@@ -18,6 +18,7 @@ class ExplorePage extends React.Component {
     this.setLoading(true);
     ApiService.get(ApiService.ENDPOINTS.providers)
       .then((data) => {
+        console.log(data)
         this.setState({
           isLoading: false,
           data: data.data
@@ -31,20 +32,47 @@ class ExplorePage extends React.Component {
     });
   }
 
-  filterProviders = (event) => {
+  filterProviders = async (event) => {
+
     // TASK 2:
     // On input, filter Available Providers based on Name, Address and Type
     //
     // ============== CODE GOES BELOW THIS LINE :) ==============
+    let val = event.target.value;
+    
+    try {
+      let req = await fetch(`https://rhmo-sample-api.herokuapp.com/providers`, {
+        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MTgzMzUwLCJleHAiOjE1OTY3NzUzNTB9.SS17FWeuomLQxAqyIEiPk0hTjLcKjh91XpM6U2X7dkM"
+      });
+      let res = await req.json()
+      
+      let filtered =  await res.data.filter(each => {
+        return each.name.toLowerCase().includes(val.toLowerCase()) || each.type.toLowerCase().includes(val.toLowerCase()) || each.location.address.toLowerCase().includes(val.toLowerCase())
+      })
+      this.setState({isLoading: false, data: filtered.length === 0? [] : filtered});
+      console.log(filtered)
+    } catch (error) {
+      console.log(error)
+      
+    }
     
   }
 
-  switchView = () => {
+  switchView = (e) => {
     // TASK 4:
     // onClick on a view preference, switch across the different view options (Gallery, List, Grid)
     // based on whatever the user selects.
     //
     // ============== CODE GOES BELOW THIS LINE :) ==============
+    [...document.querySelectorAll('.fa')].forEach(each => {
+      if (each.classList.contains('active')){
+        each.classList.remove('active')
+      }
+      
+    })
+    e.target.classList.add('active')
+    e.preventDefault()
+
   }
 
   render() {

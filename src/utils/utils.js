@@ -22,4 +22,5 @@ export const pathGet = (arr1, query) => {
   // `pathGet(a, 'James')` = "a.user.name.firstName"
 
   // ============== CODE GOES BELOW THIS LINE :) ==============
+  
 }

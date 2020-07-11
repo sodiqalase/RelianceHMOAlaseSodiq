@@ -15,16 +15,16 @@ class Gallery extends React.Component {
   // Write tests for the Gallery component. Tests should be written in the Gallery.spec.js file in the __tests__ folder.
   //
   //
-  // ============== CODE GOES BELOW THIS LINE :) ==============
-
+  
 
   render() {
-    const { items } = this.props;    
+    let {items} = this.props
     if(!items || items.length === 0) {
       return (
         <LoadingScreen />
       )
     }
+    
     return (
       <div data-testid="gallery" className="box-shadow gallery">
         <div className="gallery__slider">
@@ -50,7 +50,7 @@ class Gallery extends React.Component {
             <button className="gallery__slider-controls__button left">
               <i className="fa fa-chevron-left"></i>
             </button>
-            <button className="gallery__slider-controls__button right">
+            <button  className="gallery__slider-controls__button right">
               <i className="fa fa-chevron-right"></i>
             </button>
           </div>      

@@ -25,7 +25,9 @@ class ApiService {
   static async get(url, data) {
     const response = await fetch(
       `${url}${data ? `?${queryString.stringify(data)}` : ''}`
-    );
+    , {
+      "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MTgzMzUwLCJleHAiOjE1OTY3NzUzNTB9.SS17FWeuomLQxAqyIEiPk0hTjLcKjh91XpM6U2X7dkM"
+    });
     return response.json();
   }
 
